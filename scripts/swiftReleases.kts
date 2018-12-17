@@ -1,5 +1,10 @@
 #!/usr/bin/env kscript
 
+@file:MavenRepository("jitpack", "https://jitpack.io" )
+@file:DependsOnMaven("com.github.fcannizzaro:ksoup:1.0.+")
+
+import com.fcannizzaro.ksoup.Ksoup
+import org.jsoup.Jsoup
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -14,3 +19,7 @@ println(date)
 val release_slug = "swift-DEVELOPMENT-SNAPSHOT-$date-a"
 val url = "https://swift.org/builds/development/xcode/$release_slug/$release_slug-osx.pkg"
 print(url)
+
+
+val html = Jsoup.connect(url).get()
+val ksoup = Ksoup(html)
